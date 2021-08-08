@@ -2,7 +2,12 @@ import sys
 import pandas as pd
 import gmplot
 
-amenitiy_list = ["cafe", "pub", "restaurant", "fast_food", "bar"]
+amenity_list = ["cafe", "pub", "restaurant", "fast_food", "bar"]
+# Rough lat/lon boundaries for vancouver in case we need it
+vancouver_north_lat = 49.317274
+vancouver_south_lat = 49.198040
+vancouver_west_lon = -132.225105
+vancouver_east_lon = -123.023747
 
 def has_wikidata(dictionary):
     return 'brand:wikidata' in dictionary.keys()
@@ -13,7 +18,7 @@ def main(in_directory):
 
     van_data = pd.read_json(in_directory, lines=True)
     van_data = van_data.drop(['timestamp'], axis='columns')
-    van_data = van_data.loc[van_data['amenity'].isin(amenitiy_list)]
+    van_data = van_data.loc[van_data['amenity'].isin(amenity_list)]
     van_data['has_wikidata'] = van_data['tags'].apply(has_wikidata)
 
     van_data_counts = van_data.groupby(['name']).count()
