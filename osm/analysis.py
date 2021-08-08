@@ -27,7 +27,7 @@ def main(in_directory):
     # van_data.to_csv("output.csv")
     print(van_data)
 
-    gmap = gmplot.GoogleMapPlotter(49.246292, -123.116226, 12, apikey=apikey)
+    gmap = gmplot.GoogleMapPlotter(49.246292, -123.116226, 13, apikey=apikey)
     gmap.heatmap(van_data['lat'], van_data['lon'])
     gmap.draw('test.html')
 
