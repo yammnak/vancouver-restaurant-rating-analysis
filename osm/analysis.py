@@ -1,5 +1,6 @@
 import sys
 import pandas as pd
+import gmplot
 
 amenitiy_list = ["cafe", "pub", "restaurant", "fast_food", "bar"]
 
@@ -7,6 +8,9 @@ def has_wikidata(dictionary):
     return 'brand:wikidata' in dictionary.keys()
 
 def main(in_directory):
+    # apikey for the google maps plot
+    apikey = 'AIzaSyCc3J7d3RwECUaAtYPZ2KfSK121UJDlnVc'
+
     van_data = pd.read_json(in_directory, lines=True)
     van_data = van_data.drop(['timestamp'], axis='columns')
     van_data = van_data.loc[van_data['amenity'].isin(amenitiy_list)]
@@ -20,8 +24,12 @@ def main(in_directory):
 
     van_data = van_data.merge(van_data_counts, left_on='name', right_on='name')
 
-    van_data.to_csv("output.csv")
+    # van_data.to_csv("output.csv")
     print(van_data)
+
+    gmap = gmplot.GoogleMapPlotter(49.246292, -123.116226, 12, apikey=apikey)
+    gmap.heatmap(van_data['lat'], van_data['lon'])
+    gmap.draw('test.html')
 
 if __name__=='__main__':
     in_directory_main = sys.argv[1]
