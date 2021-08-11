@@ -20,6 +20,8 @@ def main(in_directory, out_directory):
     # limit data by anemity_list and mark has_wikidata (assuming this means franchise)
     van_data = van_data.loc[van_data['amenity'].isin(amenity_list)]
     van_data['has_wikidata'] = van_data['tags'].apply(has_wikidata)
+    # drop tags column
+    van_data = van_data.drop(columns=['tags'])
 
     # find resturant counts with the same name
     van_data_counts = van_data.groupby(['name']).count()
