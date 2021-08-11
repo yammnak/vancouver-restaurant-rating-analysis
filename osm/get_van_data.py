@@ -15,10 +15,10 @@ def main(in_directory, out_directory):
     finder = af.AreaFinder()
     van_data['area_name'] = van_data.apply(lambda x: finder.get_area_name(x['lat'], x['lon']), axis='columns')
     # drop all outside the city of vancouver
-    van_data = van_data.loc[(van_data['area_name'] != None)]
+    van_data = van_data[van_data['area_name'].notnull()]
 
     # limit data by anemity_list and mark has_wikidata (assuming this means franchise)
-    van_data = van_data.loc[van_data['amenity'].isin(amenity_list)]
+    van_data = van_data[van_data['amenity'].isin(amenity_list)]
     van_data['has_wikidata'] = van_data['tags'].apply(has_wikidata)
     # drop tags column
     van_data = van_data.drop(columns=['tags'])
