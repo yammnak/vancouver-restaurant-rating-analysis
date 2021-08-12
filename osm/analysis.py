@@ -44,11 +44,6 @@ def GetDropNAVars(df):
         kc, mp, oak, rc, sun, wpg
 
 def GetAnovaPValue(df):
-    areas = ['Arbutus-Ridge', 'Downtown', 'Fairview', 'Grandview-Woodland', 'Hastings-Sunrise', \
-        'Marpole', 'Riley Park', 'Shaughnessy', 'Strathcona', 'West End', 'Dunbar-Southlands', \
-            'Kerrisdale', 'Killarney', 'Kitsilano', 'South Cambie', 'Victoria-Fraserview', \
-                'Kensington-Cedar Cottage', 'Mount Pleasant', 'Oakridge', 'Renfrew-Collingwood', \
-                    'Sunset', 'West Point Grey']
     ar, cbd, fair, gw, hs, marp, \
         rp, shau, str, we, ds, kerr, kil, kits, sc, vf, \
         kc, mp, oak, rc, sun, wpg = GetDropNAVars(df)
