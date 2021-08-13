@@ -1,9 +1,7 @@
-import sys
 import pandas as pd
 from scipy import stats
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
 import matplotlib.pyplot as plt
-import seaborn
 
 def get_ratings_anova(van_data):
     OUTPUT_TEMPLATE = (
