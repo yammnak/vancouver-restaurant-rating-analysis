@@ -39,9 +39,10 @@ def get_ratings_num(rating_data):
 
 def main(in_directory, out_directory):
     loc_data = pd.read_csv(in_directory, index_col=None)
-
+    print(loc_data)
     # get parameters for API call
-    loc_data['parameters'] = "input="+loc_data['name'].apply(to_searchable)+"&point="+loc_data['lon'].astype(str)+","+loc_data['lat'].astype(str)
+    loc_data['parameters'] = "input="+loc_data['name'].apply(to_searchable)+"&locationbias=point:"+loc_data['lat'].astype(str)+","+loc_data['lon'].astype(str)
+    print(loc_data['parameters'])
     # get rating information
     loc_data['rating_data'] = loc_data['parameters'].apply(get_ratings_data)
     loc_data['rating'] = loc_data['rating_data'].apply(get_ratings)
