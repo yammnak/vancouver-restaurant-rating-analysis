@@ -89,7 +89,7 @@ def main(in_directory):
     #get_ratings_histogram(van_data)
     #get_grouped_ratings_histogram(van_data)
     #ANOVA_analysis.get_ratings_anova(van_data)
-    get_linear_regression(van_data)
+    #get_linear_regression(van_data)
 
     
     plt.show()
