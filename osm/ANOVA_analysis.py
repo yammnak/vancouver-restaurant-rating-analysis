@@ -9,10 +9,8 @@ def get_ratings_anova(van_data):
     OUTPUT_TEMPLATE = (
         '"Do different areas in Vancouvers have different average ratings?" p-value:  {area_rating_p:.3g}\n'
         '"Do different areas in Vancouvers have different average ratings when franchises are not included?" p-value:  {non_franchise_area_rating_p:.3g}\n'
-        '"Do different areas in Vancouvers have different average ratings when franchises and non-franchises with multiple stores are not included?" p-value:  {non_franchise_single_area_rating_p:.3g}\n'
         '"Do different areas in Vancouvers have different average ratings when areas with less than 25 total ratings are filtered out?" p-value:  {filtered_area_rating_p:.3g}\n'
         '"Do different areas in Vancouvers have different average ratings when franchises are not included and areas with less than 25 total ratings are filtered out?" p-value:  {filtered_non_franchise_area_rating_p:.3g}\n'
-        '"Do different areas in Vancouvers have different average ratings when franchises and non-franchises with multiple stores are not included and areas with less than 25 total ratings are filtered out?" p-value:  {filtered_non_franchise_single_area_rating_p:.3g}\n'
     )
 
     def GetDropNAVars(df):
@@ -54,16 +52,10 @@ def get_ratings_anova(van_data):
         
         return anova.pvalue
 
-    def CountLessThan25(df):
-        return df.count() < 25
-
-    non_franchises_multi = van_data.loc[(van_data['has_wikidata'] == False) & (van_data['count'] > 1) & (van_data['count'] < 5)]
-    non_franchises_single = van_data.loc[(van_data['has_wikidata'] == False) & (van_data['count'] == 1)]
     non_franchises = van_data.loc[(van_data['has_wikidata'] == False) | (van_data['count'] < 5)]
 
     van_data_pivot = van_data.pivot(values = 'rating', columns = 'area_name')
     non_franchises_pivot = non_franchises.pivot(values = 'rating', columns = 'area_name')
-    non_franchises_single_pivot = non_franchises_single.pivot(values = 'rating', columns = 'area_name')
 
     # Comparing ratings between areas including all stores
     areas_anova = GetAnovaPValue(van_data_pivot)
@@ -73,28 +65,23 @@ def get_ratings_anova(van_data):
     non_franchise_areas_anova = GetAnovaPValue(non_franchises_pivot)
     non_franchise_areas_posthoc = pairwise_tukeyhsd(pd.to_numeric(non_franchises['rating']), non_franchises['area_name'], alpha = 0.05)
 
-    # Comparing ratings between areas but not including franchises and non-franchises with multiple stores
-    non_franchise_single_areas_anova = GetAnovaPValue(non_franchises_single_pivot)
-    non_franchise_single_areas_posthoc = pairwise_tukeyhsd(pd.to_numeric(non_franchises_single['rating']), non_franchises_single['area_name'], alpha = 0.05)
-
     ar, cbd, fair, gw, hs, marp, \
         rp, shau, stra, we, ds, kerr, kil, kits, sc, vf, \
         kc, mp, oak, rc, sun, wpg = GetDropNAVars(van_data_pivot)
-
     areas_anova_filtered = stats.f_oneway(cbd, fair, gw, hs, kc, kil, kits, marp, mp, rc, rp, \
         stra, sun, vf, we, wpg).pvalue
+
+    ar, cbd, fair, gw, hs, marp, \
+        rp, shau, stra, we, ds, kerr, kil, kits, sc, vf, \
+        kc, mp, oak, rc, sun, wpg = GetDropNAVars(non_franchises_pivot)
     non_franchise_areas_anova_filtered = stats.f_oneway(cbd, fair, gw, hs, kc, kits, marp, mp, rc, rp, \
         stra, sun, vf, we, wpg).pvalue
-    non_franchise_single_areas_anova_filtered = stats.f_oneway(cbd, fair, gw, hs, kc, kits, marp, mp, rc, rp, \
-        stra, sun, we, wpg).pvalue
 
     print(OUTPUT_TEMPLATE.format(
         area_rating_p = areas_anova,
         non_franchise_area_rating_p = non_franchise_areas_anova,
-        non_franchise_single_area_rating_p = non_franchise_single_areas_anova,
         filtered_area_rating_p = areas_anova_filtered,
         filtered_non_franchise_area_rating_p = non_franchise_areas_anova_filtered,
-        filtered_non_franchise_single_area_rating_p = non_franchise_single_areas_anova_filtered
     ))
     areas_posthoc.plot_simultaneous()
     plt.title('Tukey Posthoc Area Restaurant Ratings Comparison')
