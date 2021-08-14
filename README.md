@@ -27,7 +27,7 @@ Using data analysis tools, we wanted to determine if certain local areas in the 
 
 
 ## How to Run Code
-### Data Cleaning to Produce the van_data_rated.csv (not recommended)
+### Data Cleaning to produce van_data_rated.csv (not recommended)
 1. `python3 get_van_data.py amenities-vancouver.json.gz van_data.csv`
     + This produces a cleaned up .csv from the larger dataset.
 2. `python3 google_ratings.py van_data.csv van_data_rated.csv`
