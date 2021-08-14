@@ -22,6 +22,7 @@ Using data analysis tools, we wanted to determine if certain local areas in the 
 - Data Files (in `osm/`)
     + `amenities-vancouver.json.gz`: Extracted Vancouver data from planet.osm (given in project files)
     + `local-area-boundary.json`: City of Vancouver's local area boundaries provided by their [Open Data Portal](https://opendata.vancouver.ca/explore/dataset/local-area-boundary/information/)
+    + `test_data.csv`: test data file for testing `google_ratings.py`
     + `van_data.csv`: csv produced by `get_van_data.py` using `amenities-vancouver.json.gz`
     + `van_data_rated.csv`: csv produced by `google_ratings.py` using `van_data.csv`
 
