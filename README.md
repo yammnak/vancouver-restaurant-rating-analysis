@@ -45,3 +45,7 @@ Using data analysis tools, we wanted to determine if certain local areas in the 
         4. Get Ratings ANOVA for Local Areas
         5. Get Linear Regression for Franchise Proportion Boundaries vs. Average Rating Local Areas.
 - Run the `heatmaps.ipynb` Jupyiter notebook for heatmaps. 
+
+## Authors
+- Yamato Nakahara
+- Vincent Fang
