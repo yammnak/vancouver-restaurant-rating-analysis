@@ -27,12 +27,12 @@ Using data analysis tools, we wanted to determine if certain local areas in the 
 
 
 ## How to Run Code
-### Data Cleaning to Produce needed for van_data_rated.csv (NOT RECOMMENDED)
+### Data Cleaning to Produce the van_data_rated.csv (not recommended)
 1. `python3 get_van_data.py amenities-vancouver.json.gz van_data.csv`
     + This produces a cleaned up .csv from the larger dataset.
 2. `python3 google_ratings.py van_data.csv van_data_rated.csv`
-    + Because of the API calls required, this step takes about 20 minutes and costs money.
-    + If you want to test the functionality, do it with a smaller dataset.
+    + Because of the API calls required, this step takes about <b>20 minutes</b> and costs money.
+    + If you want to test the functionality, do it with a smaller dataset only once.
         * `python3 google_ratings.py test_data.csv test_data_rated.csv`
 
 ### Data Analysis
