@@ -75,8 +75,9 @@ def get_linear_regression(van_data):
     plt.ylabel("Average Ratings for an Area")
     plt.xticks(rotation=25)
     plt.subplots_adjust(bottom=0.15)
-    print(f"Linear regerssion p-value: {fit.pvalue}")
-    print(f"Linear regerssion slope: {fit.slope}")
+    print(f"Linear regression p-value: {fit.pvalue}")
+    print(f"Linear regression slope: {fit.slope}")
+    print(f"Linear regression intercept: {fit.intercept}")
 
 
 
