@@ -1,0 +1,26 @@
+lat,lon,amenity,name,area_name,has_wikidata,count
+49.2780156,-123.0995912,pub,Brickhouse,Strathcona,False,1
+49.2478937,-123.089967,cafe,Eclettico Art & Coffee,Kensington-Cedar Cottage,False,1
+49.2478265,-123.0903617,restaurant,Grand View Szechuan Restaurant,Riley Park,False,1
+49.2471335,-123.0903681,restaurant,Egg & Co.,Riley Park,False,1
+49.2316361,-123.1558458,restaurant,Chi Noodle Bar,Kerrisdale,False,1
+49.2344735,-123.1561983,restaurant,Baoguette Vietnamese Bistro,Kerrisdale,False,1
+49.2347899,-123.1593373,restaurant,La Vita,Arbutus-Ridge,False,1
+49.2681625,-123.1465091,restaurant,Bibo,Kitsilano,False,1
+49.2813137,-123.048356,restaurant,Bao Chau,Hastings-Sunrise,False,1
+49.2753425,-123.1211166,restaurant,Bistro Sakana,Downtown,False,1
+49.275246,-123.120775,restaurant,Minami Yaletown,Downtown,False,1
+49.2755974,-123.1203095,restaurant,Hula,Downtown,False,1
+49.2620492,-123.0332492,restaurant,SushiHolic,Hastings-Sunrise,False,1
+49.2445292,-123.1257268,cafe,Second Cup,South Cambie,True,1
+49.2572552,-123.0895434,restaurant,Les Faux Bourgeois,Mount Pleasant,False,1
+49.2741,-123.1219573,restaurant,Salsa and Agave Mexican Grill,Downtown,False,1
+49.2740162,-123.122343,fast_food,DQ Orange Julius,Downtown,False,1
+49.2505553,-123.0773106,restaurant,Po Kong,Kensington-Cedar Cottage,False,1
+49.279869,-123.1068827,fast_food,Blazing Sushi,Downtown,False,1
+49.2812554,-123.0273975,restaurant,Just Waffles,Hastings-Sunrise,False,1
+49.2270126,-123.0909079,restaurant,So Hyang Korean Cuisine,Sunset,False,1
+49.251337,-123.1272962,restaurant,Sabra Kosher Bakery & Restaurant,South Cambie,False,1
+49.2314863,-123.1191276,restaurant,Peninsula Seafood Restaurant,Oakridge,False,1
+49.2257511,-123.1011754,restaurant,Main Kabab Hut,Sunset,False,1
+49.2700634,-123.103495,cafe,Boba Essence,Mount Pleasant,False,1
