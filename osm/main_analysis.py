@@ -27,7 +27,7 @@ def get_ratings_histogram(van_data):
     plt.hist(van_data['rating'])
     plt.xlabel("Rating")
     plt.ylabel("Number of Restaurant Ratings")
-    plt.title("Histogram of Restaurant Ratings in Vancouver")
+    plt.title("Histogram of Restaurant Ratings")
 
 def get_grouped_ratings_histogram(van_data):
     franchises = van_data.groupby('is_franchise').agg({'rating':'mean', 'rating_num':'count'})
@@ -40,7 +40,7 @@ def get_grouped_ratings_histogram(van_data):
         alternative='two-sided'
     ).pvalue
     print(f"Mann Whiteyu p-value for franchise/non-franchise ratings: {mann_pvalue}")
-    plt.title("Histogram of Restaurants Ratings")
+    plt.title("Histogram of Franchise and Non-Franchise Restaurants Ratings")
     plt.xlabel("Rating")
     plt.ylabel("Number of Restaurants Ratings")
     plt.hist([franchise_rating,non_franchise_rating], label=['Non-franchise','Franchise'])
@@ -51,12 +51,13 @@ def get_linear_regression(van_data):
     grouped_data = van_data.groupby('area_name').agg({'rating': 'mean', 'rating_num': 'count', 'is_franchise': 'sum'}).reset_index()
     
     grouped_data['relative_franchise'] = grouped_data['is_franchise']/(grouped_data['rating_num'])
-    # outlier
-    grouped_data = grouped_data[grouped_data['area_name']!='Oakridge']
+    # remove ratings less than 25
+    grouped_data = grouped_data[grouped_data['rating_num'] >= 25]
+    
     fit = stats.linregress(grouped_data['relative_franchise'], grouped_data['rating'])
 
-    style = dict(size=8, color='#242424')
-    ax = grouped_data.plot.scatter(x='relative_franchise', y='rating', c='rating_num', colormap='viridis')
+    style = dict(size=9, color='#242424')
+    ax = grouped_data.plot.scatter(x='relative_franchise', y='rating', c='rating_num', colormap='plasma')
     plt.plot(grouped_data['relative_franchise'], grouped_data['relative_franchise'] * fit.slope + fit.intercept, 'r-', linewidth=3, alpha=0.6)
 
     fig = plt.gcf()
@@ -69,12 +70,13 @@ def get_linear_regression(van_data):
         else:
             ax.text(row['relative_franchise'], row['rating']+0.005, row['area_name'], ha='center', **style)
     
-    plt.title("Linear Regression of Relative Franchise Porportion\n vs Average Rating for Restaurants a Local Area")
-    plt.xlabel("Relative Franchise Restaurants Porportion")
+    plt.title("Franchise Porportion vs Average Resturaunt Rating for a Local Area (with # of Ratings ≥ 25)")
+    plt.xlabel("Franchise Restaurants Porportion")
     plt.ylabel("Average Ratings for an Area")
     plt.xticks(rotation=25)
-    print(grouped_data)
-    print("Linear regerssion p-value: {fit.pvalue}")
+    plt.subplots_adjust(bottom=0.15)
+    print(f"Linear regerssion p-value: {fit.pvalue}")
+    print(f"Linear regerssion slope: {fit.slope}")
 
 
 
@@ -83,15 +85,28 @@ def main(in_directory):
     # remove ratings with under 20 ratings numbers
     van_data = van_data[van_data['rating_num'] >= 20]
     van_data['is_franchise'] = (van_data['has_wikidata'] == True) | (van_data['count'] >= 5)
-    # COMMENT OUT ONE ANALYSIS AT A TIME:
 
-    #get_average_ratings_bar_graph(van_data)
-    #get_ratings_histogram(van_data)
-    #get_grouped_ratings_histogram(van_data)
-    #ANOVA_analysis.get_ratings_anova(van_data)
-    #get_linear_regression(van_data)
+    print("1: get_average_ratings_bar_graph")
+    print("2: get_ratings_histogram")
+    print("3: get_grouped_ratings_histogram")
+    print("4: get_ratings_anova")
+    print("5: get_linear_regression")
+    analysis_type = input("Enter anaylsis type:")
 
-    
+    if analysis_type == '1':
+        get_average_ratings_bar_graph(van_data)
+    elif analysis_type == '2':
+        get_ratings_histogram(van_data)
+    elif analysis_type == '3':
+        get_grouped_ratings_histogram(van_data)
+    elif analysis_type == '4':
+        ANOVA_analysis.get_ratings_anova(van_data)
+    elif analysis_type == '5':
+        get_linear_regression(van_data)
+    else:
+        print("Incorrect Input. Must be a 1-5.")
+        return
+
     plt.show()
 
 
